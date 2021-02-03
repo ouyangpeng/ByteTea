@@ -10,6 +10,8 @@ import org.objectweb.asm.tree.FieldNode
 import java.util.*
 
 class Context internal constructor(project: Project?, android: AppExtension?, extension: EncryptStringExtension?) : BaseContext<EncryptStringExtension?>(project, android, extension) {
+
+    // ignoreClassNameList是我们提前收集好的需要忽略的不做transform的列表
     val ignoreClassNameList: MutableList<String?> = ArrayList()
 
 

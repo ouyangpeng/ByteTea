@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.didiglobal.booster'
+
+apply plugin: 'bytex'
 apply plugin: 'bytetea.click_debounce'
 apply plugin: 'bytetea.encrypt_string'
 
@@ -16,7 +18,7 @@ click_debounce {
     enableInDebug true
     time = 700
     whitePackage = [
-            "net.mikaelzero.app"
+            "android.x"
     ]
 }
 

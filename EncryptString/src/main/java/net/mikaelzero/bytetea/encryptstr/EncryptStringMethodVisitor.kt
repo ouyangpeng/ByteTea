@@ -20,17 +20,25 @@ class EncryptStringMethodVisitor(
     private val encryptMethodName = "decode"
 
 
+    //所有的字符串在字节码中的指令都是LDC指令，因此只需要在访问LDC指令的时候进行修改即可
     override fun visitLdcInsn(value: Any?) {
+        //我们判断下是否为String类型，然后进行代码修改
         if (value is String) {
             val str = Base64.encodeBase64String(value.toByteArray())
+            //这步是直接修改LDC指令下对应的value，而我们的value就是上面的字符串
             mv.visitLdcInsn(str)
+            //调用编写好的Lib里的代码，也就是 Base64Util.decode
             mv.visitMethodInsn(Opcodes.INVOKESTATIC, className, encryptMethodName, "(Ljava/lang/String;)Ljava/lang/String;", false)
             return
         }
         super.visitLdcInsn(value)
     }
 
+    //上面的visitLdcInsn方法编写完成后，你会发现一个问题，就是 visitLdcInsn 访问不到 static final 的字符串，
+    // 而且static final 的字符串必须设置值或者声明后在 static 块里进行初始化，
+    // 所以我们需要找一个地方能够获取到 static final 的指令并且统一处理，也就是visitInsn，并且他的code为 RETURN，代码如下
     override fun visitInsn(opcode: Int) {
+        //static 的函数名为 <clinit>
         if (opcode == Opcodes.RETURN && methodName == "<clinit>") {
             staticFinalStringFieldNodeList.forEach { fieldNode ->
                 val str = Base64.encodeBase64String((fieldNode.value as String).toByteArray())

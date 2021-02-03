@@ -14,6 +14,7 @@ import org.objectweb.asm.tree.FieldNode
  */
 class EncryptStringClassVisitor : BaseClassVisitor() {
     var owner: String? = null
+    // staticFinalStringFieldNodeList是我们提前收集好的列表
     val staticFinalStringFieldNodeList = mutableListOf<FieldNode>()
 
     override fun visit(version: Int, access: Int, name: String?, signature: String?, superName: String?, interfaces: Array<out String>?) {

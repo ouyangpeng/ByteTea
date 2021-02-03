@@ -18,6 +18,7 @@ internal class FindIgnoreClass(private val context: Context) : BaseClassVisitor(
     }
 
     override fun visitAnnotation(descriptor: String?, visible: Boolean): AnnotationVisitor {
+        // 如果有@EncryptIgnore 注解，就添加到忽略列表
         if (descriptor == "Lnet/mikaelzero/bytetea/lib/encryptstr/EncryptIgnore;") {
             context.addIgnoreClass(classInfo)
         }

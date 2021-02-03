@@ -3,7 +3,6 @@ package net.mikaelzero.bytetea.clickdebounce.visitor;
 import com.ss.android.ugc.bytex.common.visitor.BaseClassVisitor;
 
 import net.mikaelzero.bytetea.clickdebounce.ClickDebounceExtension;
-import net.mikaelzero.bytetea.clickdebounce.Utils;
 
 import org.objectweb.asm.MethodVisitor;
 

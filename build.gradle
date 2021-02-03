@@ -8,12 +8,17 @@ buildscript {
     repositories {
 //        maven { url uri("${rootProject.projectDir}/maven") }
         maven { url 'https://dl.bintray.com/mikaelzero/maven'}
+        maven{
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
         maven { url 'https://oss.sonatype.org/content/repositories/public' }
         mavenCentral()
         mavenLocal()
+        maven { url 'https://jitpack.io' }
+
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
+
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${gradle_version}"
@@ -34,10 +39,12 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://dl.bintray.com/mikaelzero/maven'}
+        maven{
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
         mavenCentral()
         mavenLocal()
-        google()
-        jcenter()
         maven { url 'https://jitpack.io' }
         maven { url 'https://oss.sonatype.org/content/repositories/public' }
     }

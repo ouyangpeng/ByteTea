@@ -27,12 +27,15 @@ class EncryptStringPlugin : CommonPlugin<EncryptStringExtension, Context>() {
 
     //relativePath = xxx.class
     override fun transform(relativePath: String, chain: ClassVisitorChain): Boolean {
+        // 如果不处于需要加密的包名列表中，则不做处理
         if (!relativePath.isExcluded) {
             return super.transform(relativePath, chain)
         }
+        // R文件不做处理
         if (relativePath.contains("R$")) {
             return super.transform(relativePath, chain)
         }
+        // 判断 是否处于 忽略列表中  如果处于  直接不继续处理
         if (context.ignoreClassNameList.contains(relativePath)) {
             return super.transform(relativePath, chain)
         }
@@ -43,6 +46,7 @@ class EncryptStringPlugin : CommonPlugin<EncryptStringExtension, Context>() {
 
     override fun onApply(project: Project) {
         super.onApply(project)
+        // 插件项目依赖于net.mikaelzero.bytetea:encrypt-string-lib:1.0库
         project.dependencies.add("implementation", "net.mikaelzero.bytetea:encrypt-string-lib:1.0")
     }
 
