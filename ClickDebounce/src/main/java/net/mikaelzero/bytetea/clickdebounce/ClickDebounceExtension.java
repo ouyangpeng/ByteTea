@@ -2,13 +2,17 @@ package net.mikaelzero.bytetea.clickdebounce;
 
 import com.ss.android.ugc.bytex.common.BaseExtension;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ClickDebounceExtension extends BaseExtension {
 
+    /**
+     * 重复点击有效的间隔时间
+     */
     private long time;
-
+    /**
+     * 白名单
+     */
     private List<String> whitePackage;
 
     public long getTime() {

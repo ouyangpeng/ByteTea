@@ -13,10 +13,12 @@ class ClickDebouncePlugin : CommonPlugin<ClickDebounceExtension?, Context>() {
         return Context(project, android, extension)
     }
 
+    //relativePath = xxx.class
     override fun transform(@Nonnull relativePath: String, @Nonnull chain: ClassVisitorChain): Boolean {
         if (relativePath == "net/mikaelzero/bytetea/lib/clickdebounce/DebouncedWarp.class") {
             chain.connect(TimeClassVisitor(extension))
         } else {
+            // 如果不是处于白名单中，则处理click事件
             if (!extension!!.whitePackage.any { relativePath.startsWith(it.replace(".", "/")) }) {
                 chain.connect(FindClickClassVisitor())
             }

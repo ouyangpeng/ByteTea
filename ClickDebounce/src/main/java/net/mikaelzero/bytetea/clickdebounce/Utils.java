@@ -6,6 +6,14 @@ import org.objectweb.asm.Opcodes;
 
 public class Utils implements Opcodes {
 
+    /*
+     *  & 是位运算bai里的位与操作，运算规则为
+     *  0 & 0 = 0，
+     *  0 & 1 = 0，
+     *  1 & 0 = 0，
+     *  1 & 1 = 1
+     */
+
     private Utils() {
         throw new AssertionError("no instance");
     }
